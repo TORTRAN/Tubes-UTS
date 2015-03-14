@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <iostream> 
 #include "map.h"
+#include "base.h"
+#include "line.h"
 
 class Window{ // Window adalah clipper yang ada di peta besar
 	private:

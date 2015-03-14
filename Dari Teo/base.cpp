@@ -1,4 +1,3 @@
-#include "clipper.h"
 #include "base.h"
 
 using namespace std;
