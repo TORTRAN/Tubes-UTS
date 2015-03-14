@@ -6,13 +6,15 @@
 #include "base.h"
 using namespace std;
 
-class Map{
+extern FrameBuffer fb;
+
+class Map{ // Map berisi semua gambar yang ada
 public:
 	// CTOR
 	Map();
 
 	// ATTR
-	vector<Line> vector;
+	vector<Line> vectorLine;
 	Line line;
 	
 	// Gambar Map nya

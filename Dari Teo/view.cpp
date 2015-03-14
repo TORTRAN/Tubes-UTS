@@ -112,8 +112,8 @@ void View::Draw(Window w){
 }
 
 void View::GetThrough(Line L, Window w){
-	boolean doneP1 = false;
-	boolean doneP2 = false;
+	bool doneP1 = false;
+	bool doneP2 = false;
 	while (!(doneP1 && doneP2)){
 		int indexP1 = L.P1.getIndex(w.RectWindow[0], w.RectWindow[1]);
 		int indexP2 = L.P2.getIndex(w.RectWindow[0], w.RectWindow[1]);  

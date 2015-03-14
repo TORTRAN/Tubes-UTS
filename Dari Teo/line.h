@@ -2,7 +2,10 @@
 #define LINE_H
 
 #include "base.h"
+
+extern FrameBuffer fb;
 using namespace std;
+
 class Line{
 public:
 	Point P1;

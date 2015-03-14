@@ -8,6 +8,8 @@
 #include "base.h"
 #include "line.h"
 
+extern FrameBuffer fb;
+
 class Window{ // Window adalah clipper yang ada di peta besar
 	private:
 

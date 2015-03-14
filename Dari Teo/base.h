@@ -19,7 +19,8 @@
 #include <stdlib.h>
 #include <iostream>
 
-static FrameBuffer fb;
+extern FrameBuffer fb;
+
 //class color defines color that needed with rgb
 class Color{
 	public:

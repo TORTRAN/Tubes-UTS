@@ -6,6 +6,8 @@
 #include <iostream> 
 #include "window.h"
 
+extern FrameBuffer fb;
+
 class View{ // View adalah hasil pengambilan gambar dari window
 	public:
 		// Attr
