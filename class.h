@@ -1,3 +1,13 @@
+/*
+contain class:
+-color
+-point
+-Frame buffer
+-line
+-polygon
+-building
+-peta
+*/
 #ifndef CLASS_H
 #define CLASS_H
 
@@ -72,12 +82,12 @@ public:
 	void Draw(FrameBuffer fb);
 };
 
-class Rectangle{
+class Polygon{
 public:
 	Line RectLine[4];
 	Color c;
 
-	Rectangle();
+	Polygon();
 
 	void SetColor(Color color);
 	void Draw(FrameBuffer fb);
@@ -87,21 +97,21 @@ public:
 class Building{
 public:
 
-	Rectangle Roof;
+	Polygon Roof;
 	int Height;
 	Color c;
 
 	Building();
-	Building(Rectangle r);
-	Building(Rectangle r, int h);
+	Building(Polygon r);
+	Building(Polygon r, int h);
 
-	void SetRoof(Rectangle roof);
+	void SetRoof(Polygon roof);
 	void SetHeight(int h);
 	void SetColor(Color c);
 
-	Rectangle getRoof();
-	Rectangle getLeftSide();
-	Rectangle getFrontSide();
+	Polygon getRoof();
+	Polygon getLeftSide();
+	Polygon getFrontSide();
 
 	void Draw(FrameBuffer fb);
 };

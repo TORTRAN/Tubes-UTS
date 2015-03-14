@@ -42,20 +42,20 @@ Point::Point(int x1, int y1){
 	y = y1;
 }
 
-Rectangle::Rectangle():c(255,0,0){
+Polygon::Polygon():c(255,0,0){
 	RectLine[0]=Line(10,10,20,20);
 	RectLine[1]=Line(20,20,40,20);
 	RectLine[2]=Line(40,20,30,10);
 	RectLine[3]=Line(30,10,10,10);
 }
-void Rectangle::SetColor(Color color){
+void Polygon::SetColor(Color color){
 	c=color;
 	for(int i = 0; i<4 ; i++){
 		RectLine[i].c=c;
 	}
 }
 
-void Rectangle::Draw(FrameBuffer fb){
+void Polygon::Draw(FrameBuffer fb){
 	for(int i=0;i<4;i++){
 		RectLine[i].Draw(fb);
 	}
@@ -72,22 +72,22 @@ Building::Building():c(255,0,0){
 	Height = 600;
 }
 
-Building::Building(Rectangle r):c(255,0,0){
+Building::Building(Polygon r):c(255,0,0){
 	Roof=r;
 	Height=100;
 }
 
-Building::Building(Rectangle r, int h):c(255,0,0){
+Building::Building(Polygon r, int h):c(255,0,0){
 	Roof=r;
 	Height=h;
 }
 
-Rectangle Building::getRoof(){
+Polygon Building::getRoof(){
 	return Roof;
 }
 
-Rectangle Building::getLeftSide(){
-	Rectangle rect;
+Polygon Building::getLeftSide(){
+	Polygon rect;
 	rect.RectLine[0]=Roof.RectLine[0];
 	rect.RectLine[1]=Line(Roof.RectLine[0].P1.x,Roof.RectLine[0].P1.y,Roof.RectLine[0].P1.x,Roof.RectLine[0].P1.y+Height);
 	rect.RectLine[2]=Line(Roof.RectLine[0].P2.x,Roof.RectLine[0].P2.y,Roof.RectLine[0].P2.x,Roof.RectLine[0].P2.y+Height);
@@ -96,8 +96,8 @@ Rectangle Building::getLeftSide(){
 	return rect;
 }
 
-Rectangle Building::getFrontSide(){
-	Rectangle rect;
+Polygon Building::getFrontSide(){
+	Polygon rect;
 	rect.RectLine[0]=Roof.RectLine[1];
 	rect.RectLine[1]=Line(Roof.RectLine[1].P1.x,Roof.RectLine[1].P1.y,Roof.RectLine[1].P1.x,Roof.RectLine[1].P1.y+Height);
 	rect.RectLine[2]=Line(Roof.RectLine[1].P2.x,Roof.RectLine[1].P2.y,Roof.RectLine[1].P2.x,Roof.RectLine[1].P2.y+Height);
@@ -106,7 +106,7 @@ Rectangle Building::getFrontSide(){
 	return rect;
 }
 
-void Building::SetRoof(Rectangle r){
+void Building::SetRoof(Polygon r){
 	Roof=r;
 }
 
@@ -121,7 +121,7 @@ void Building::SetColor(Color color){
 
 void Building::Draw(FrameBuffer fb){
 	Line land[5];
-	Rectangle rect[2];
+	Polygon rect[2];
 	int i;
 	
 	//set land and roof to land
