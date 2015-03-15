@@ -120,6 +120,10 @@ public:
 class Peta{
 public:
 	vector<Building> Kota;// urutan mempengaruhi prioritas
+	Polygon frame;
+	Polygon views;
+
+	Peta();
 
 	void addBuilding(Building build);
 	void makeKotaEmpty();

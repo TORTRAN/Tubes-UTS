@@ -21,18 +21,15 @@ Color::Color(int red, int green, int blue){
 }
 	
 void Color::setRed(int r){
-	if(r<=0&&r>=255)
-		Red=r;
+	if(r<=0&&r>=255)Red=r;
 }
 
 void Color::setGreen(int g){
-	if(g<=0&&g>=255)
-		Green=g;
+	if(g<=0&&g>=255)Green=g;
 }
 
 void Color::setBlue(int b){
-	if(b<=0&&b>=255)
-		Blue=b;
+	if(b<=0&&b>=255)Blue=b;
 }
 
 Point::Point(){
@@ -45,7 +42,7 @@ Point::Point(int x1, int y1){
 	y = y1;
 }
 
-Polygon::Polygon():c(0,0,255){
+Polygon::Polygon():c(255,0,0){
 	RectLine[0]=Line(10,10,20,20);
 	RectLine[1]=Line(20,20,40,20);
 	RectLine[2]=Line(40,20,30,10);
@@ -215,6 +212,49 @@ void FrameBuffer::drawLine(Point P1,Point P2,Color c){
 	}
 }
 
+Peta::Peta():frame(Point(10,10),Point(10,400),Point(1356,400),Point(1356,10)){
+
+	Building build;
+	Polygon new_roof;
+	Polygon new_views(Point(1026,420),Point(1026,750),Point(1356,750),Point(1356,420));
+	views = new_views;
+
+	new_roof = Polygon(Point(500,140),Point(550,190),Point(640,160),Point(580,110));
+	build.Roof=new_roof;
+	build.setHeight(260);
+	addBuilding(build);
+
+	new_roof = Polygon(Point(580,220),Point(640,270),Point(720,240),Point(660,190));
+	build.Roof=new_roof;
+	build.setHeight(150);
+	addBuilding(build);
+
+	new_roof = Polygon(Point(660,290),Point(720,340),Point(810,310),Point(740,260));
+	build.Roof=new_roof;
+	build.setHeight(50);
+	addBuilding(build);
+
+	new_roof = Polygon(Point(450,300),Point(500,350),Point(580,320),Point(520,270));
+	build.Roof=new_roof;
+	build.setHeight(50);
+	addBuilding(build);
+
+	new_roof = Polygon(Point(520,60),Point(580,110),Point(660,80),Point(600,30));
+	build.Roof=new_roof;
+	build.setHeight(260);
+	addBuilding(build);
+	
+	new_roof = Polygon(Point(190,50),Point(310,150),Point(390,120),Point(270,20));
+	build.Roof=new_roof;
+	build.setHeight(260);
+	addBuilding(build);
+	
+	new_roof = Polygon(Point(310,250),Point(370,300),Point(450,270),Point(390,220));
+	build.Roof=new_roof;
+	build.setHeight(160);
+	addBuilding(build);
+}
+
 void Peta::moveBuilding(int a, int b){
 	Building build=Kota[a];
 	Kota[a]=Kota[b];
@@ -230,13 +270,15 @@ void Peta::makeKotaEmpty(){
 }
 
 void Peta::Draw(FrameBuffer fb){
-	system("clear");
 	for(int i = 0; i <= Kota.size()-1 ; i++){
 		Kota[i].Draw(fb);
 	}
+
+	frame.Draw(fb);
+	views.Draw(fb);
 }
 
-Line::Line():c(0,255,0){
+Line::Line():c(255,0,0){
 	P1.x = 0;
 	P1.y = 0;
 	P2.x = 0;
