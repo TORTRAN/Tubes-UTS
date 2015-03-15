@@ -21,18 +21,15 @@ Color::Color(int red, int green, int blue){
 }
 	
 void Color::setRed(int r){
-	if(r<=0&&r>=255)
-		Red=r;
+	if(r<=0&&r>=255)Red=r;
 }
 
 void Color::setGreen(int g){
-	if(g<=0&&g>=255)
-		Green=g;
+	if(g<=0&&g>=255)Green=g;
 }
 
 void Color::setBlue(int b){
-	if(b<=0&&b>=255)
-		Blue=b;
+	if(b<=0&&b>=255)Blue=b;
 }
 
 Point::Point(){
@@ -45,21 +42,13 @@ Point::Point(int x1, int y1){
 	y = y1;
 }
 
-Polygon::Polygon():c(0,0,255){
+Polygon::Polygon():c(255,0,0){
 	RectLine[0]=Line(10,10,20,20);
 	RectLine[1]=Line(20,20,40,20);
 	RectLine[2]=Line(40,20,30,10);
 	RectLine[3]=Line(30,10,10,10);
 }
-
-Polygon::Polygon(Point a, Point b, Point c, Point d):c(255,0,0){
-	RectLine[0]=Line(a.x, a.y, b.x, b.y);
-	RectLine[1]=Line(b.x, b.y, c.x, c.y);
-	RectLine[2]=Line(c.x, c.y, d.x, d.y);
-	RectLine[3]=Line(d.x, d.y, a.x, a.y);
-}
-
-void Polygon::setColor(Color color){
+void Polygon::SetColor(Color color){
 	c=color;
 	for(int i = 0; i<4 ; i++){
 		RectLine[i].c=c;
@@ -77,6 +66,8 @@ Building::Building():c(255,0,0){
 	Roof.RectLine[1]=Line(100,100,300,100);
 	Roof.RectLine[2]=Line(300,100,200,10);
 	Roof.RectLine[3]=Line(200,10,10,10);
+
+
 
 	Height = 600;
 }
@@ -115,17 +106,17 @@ Polygon Building::getFrontSide(){
 	return rect;
 }
 
-void Building::setRoof(Polygon r){
+void Building::SetRoof(Polygon r){
 	Roof=r;
 }
 
-void Building::setHeight(int h){
+void Building::SetHeight(int h){
 	Height=h;
 }
 
-void Building::setColor(Color color){
+void Building::SetColor(Color color){
 	c=color;
-	Roof.setColor(color);
+	Roof.SetColor(color);
 }
 
 void Building::Draw(FrameBuffer fb){
@@ -148,7 +139,7 @@ void Building::Draw(FrameBuffer fb){
 
 	//draw from roof to land and land
 	for(i=0;i<5;i++){
-		land[i].setColor(c);
+		land[i].SetColor(c);
 		land[i].Draw(fb);
 	}
 	
@@ -215,28 +206,21 @@ void FrameBuffer::drawLine(Point P1,Point P2,Color c){
 	}
 }
 
-void Peta::moveBuilding(int a, int b){
+void Peta::MoveBuilding(int a, int b){
 	Building build=Kota[a];
 	Kota[a]=Kota[b];
 	Kota[b]=build;
 }
 
-void Peta::addBuilding(Building build){
+void Peta::AddBuilding(Building build){
 	Kota.push_back(build);
 }
 
-void Peta::makeKotaEmpty(){
+void Peta::MakeKotaEmpty(){
 	Kota.clear();
 }
 
-void Peta::Draw(FrameBuffer fb){
-	system("clear");
-	for(int i = 0; i <= Kota.size()-1 ; i++){
-		Kota[i].Draw(fb);
-	}
-}
-
-Line::Line():c(0,255,0){
+Line::Line():c(255,0,0){
 	P1.x = 0;
 	P1.y = 0;
 	P2.x = 0;
@@ -254,7 +238,7 @@ void Line::line(int x1, int y1, int x2, int y2){
 	P2.x = x2;
 	P2.y = y2;
 }
-void Line::setColor(Color color){
+void Line::SetColor(Color color){
 	c=color;
 }
 void Line::Draw(FrameBuffer FB){
