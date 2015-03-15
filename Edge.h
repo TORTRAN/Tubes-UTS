@@ -12,8 +12,6 @@ public:
 
 	void calculateGradient(int x0, int y0, int x1, int y1);
 
-	void drawLine(int x0, int y0, int x1, int y1);
-	
 	Edge(int x0, int y0, int x1, int y1);
 
 	bool operator< (const Edge& edge) const;

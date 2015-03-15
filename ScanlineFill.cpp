@@ -1,6 +1,6 @@
 #include "ScanlineFill.h"
 
-static void ScanlineFill::fill(std::vector <Point> arrPoint, Color color)
+void ScanlineFill::fill(std::vector <Point> arrPoint, Color color, FrameBuffer &fb)
 {
 
 //Ubah vector point jadi vector edge
@@ -25,22 +25,19 @@ static void ScanlineFill::fill(std::vector <Point> arrPoint, Color color)
 	{
 		Edge front = globalEdges.front();
 		globalEdges.erase(globalEdges.begin());
-		ActiveEdge activeEdge(front.x, front.ymax, front.ymin, front.m, front.x0, front.y0, front.x1, front.y1);
+		ActiveEdge activeEdge(front.x, front.ymax, front.ymin, front.x0, front.y0, front.x1, front.y1);
 		activeEdges.push_back(activeEdge);
+		if (globalEdges.size() == 0) break;	
 	}
 
-	while (activeEdges.size() != 0)
+	while ((activeEdges.size() != 0) && (fb.vinfo.yres))
 	{
 		int parity = 0;
 		std::sort(activeEdges.begin(), activeEdges.end());
 		int intersectCounter = 0;
-		if (scanLine == 129)
+		
+		for (i=0; i <fb.vinfo.xres; i++)
 		{
-			std::cout << "Break" << std::endl;
-		}
-		for (i=5; i <750; i++)
-		{
-			//TODO: cek localMaxima/localMinima, ubah-ubah parity
 			if (intersectCounter < activeEdges.size())
 			{
 				if (i == activeEdges.at(intersectCounter).xval)
@@ -66,8 +63,7 @@ static void ScanlineFill::fill(std::vector <Point> arrPoint, Color color)
 			}
 			if (parity % 2 == 1)
 			{
-				Color c = birdPattern.getColor(i, scanLine);
-				setPixelCol(i, scanLine, c);				
+				fb.setPixel(i, scanLine, color);				
 			}
 		}
 		scanLine++;
@@ -84,10 +80,7 @@ static void ScanlineFill::fill(std::vector <Point> arrPoint, Color color)
 		//Update x value
 		for(i=0; i<activeEdges.size(); i++)
 		{
-			
-			//activeEdges.at(i).xval = activeEdges.at(i).xval + activeEdges.at(i).onePerM;
-			
-			activeEdges.at(i).drawLine(scanLine);
+			activeEdges.at(i).processX(scanLine);
 		}
 		//Ambil dari global edges
 		while(globalEdges.front().ymin == scanLine)
@@ -95,7 +88,7 @@ static void ScanlineFill::fill(std::vector <Point> arrPoint, Color color)
 			Edge front = globalEdges.front();
 			globalEdges.erase(globalEdges.begin());
 			
-			ActiveEdge activeEdge(front.x, front.ymax, front.ymin, front.m, front.x0, front.y0, front.x1, front.y1);
+			ActiveEdge activeEdge(front.x, front.ymax, front.ymin, front.x0, front.y0, front.x1, front.y1);
 			activeEdges.push_back(activeEdge);
 			if (globalEdges.empty())
 			{
