@@ -1,6 +1,6 @@
-#include "Scanline.h"
+#include "ScanlineFill.h"
 
-static void Scanline::fill(std::vector <Point> arrPoint, Color color)
+static void ScanlineFill::fill(std::vector <Point> arrPoint, Color color)
 {
 
 //Ubah vector point jadi vector edge

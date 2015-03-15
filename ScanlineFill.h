@@ -1,5 +1,5 @@
-#ifndef SCANLINE_H
-#ifndef SCANLINE_H
+#ifndef SCANLINEFILL_H
+#ifndef SCANLINEFILL_H
 #include <algorithm>
 #include <vector>
 
