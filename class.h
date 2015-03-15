@@ -78,7 +78,7 @@ public:
 	Line();
 	Line(int x1, int y1, int x2, int y2);
 	void line(int x1, int y1, int x2, int y2);
-	void SetColor(Color color);
+	void setColor(Color color);
 	void Draw(FrameBuffer fb);
 };
 
@@ -88,8 +88,9 @@ public:
 	Color c;
 
 	Polygon();
+	Polygon(Point a, Point b, Point c, Point d);
 
-	void SetColor(Color color);
+	void setColor(Color color);
 	void Draw(FrameBuffer fb);
 	
 };
@@ -105,9 +106,9 @@ public:
 	Building(Polygon r);
 	Building(Polygon r, int h);
 
-	void SetRoof(Polygon roof);
-	void SetHeight(int h);
-	void SetColor(Color c);
+	void setRoof(Polygon roof);
+	void setHeight(int h);
+	void setColor(Color c);
 
 	Polygon getRoof();
 	Polygon getLeftSide();
@@ -120,9 +121,9 @@ class Peta{
 public:
 	vector<Building> Kota;// urutan mempengaruhi prioritas
 
-	void AddBuilding(Building build);
-	void MakeKotaEmpty();
-	void MoveBuilding(int a, int b);
+	void addBuilding(Building build);
+	void makeKotaEmpty();
+	void moveBuilding(int a, int b);
 
 	void Draw(FrameBuffer fb);
 };
